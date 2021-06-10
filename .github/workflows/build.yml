@@ -27,6 +27,8 @@ jobs:
       - name: Build Debian package
         run: |
           mkdir -p /tmp/artifacts/{src,bin}
+          docker run --rm --privileged \
+            docker/binfmt:a7996909642ee92942dcd6cff44b9b95f08dad64
           docker run --rm \
             --volume ${{ github.workspace }}:/src \
             --volume /tmp/artifacts/bin:/build \
