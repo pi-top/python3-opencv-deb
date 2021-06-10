@@ -1,0 +1,28 @@
+name: Check for New Upstream Version
+
+on:
+  schedule:
+    # Run daily at midnight
+    - cron:  '0 0 * * *'
+
+jobs:
+  check-new-upstream-version:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2.2.0
+        with:
+          fetch-depth: 0
+
+      - name: Get upstream source
+        run: |
+          file="opencv_${{ env.VERSION }}.debian.tar.xz"
+          wget "${{ env.SRC_URL_ROOT }}/${file}"
+          tar xvf "${file}"
+          rm -rf "${file}"
+
+      - name: Check if upstream version is newer
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends devscripts
+          uscan --verbose
