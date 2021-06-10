@@ -5,10 +5,6 @@ on:
     branches:
       - master
 
-env:
-  SRC_URL_ROOT: "http://deb.debian.org/debian/pool/main/o/opencv"
-  VERSION: "4.5.1+dfsg-4"
-
 jobs:
   build-latest-debian-package:
     runs-on: ubuntu-20.04
@@ -20,13 +16,6 @@ jobs:
         uses: actions/checkout@v2.2.0
         with:
           fetch-depth: 0
-
-      - name: Get upstream source
-        run: |
-          file="opencv_${{ env.VERSION }}.debian.tar.xz"
-          wget "${{ env.SRC_URL_ROOT }}/${file}"
-          tar xvf "${file}"
-          rm -rf "${file}"
 
       - name: Patch changelog (snapshot)
         run: |

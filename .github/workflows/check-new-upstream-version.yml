@@ -14,13 +14,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Get upstream source
-        run: |
-          file="opencv_${{ env.VERSION }}.debian.tar.xz"
-          wget "${{ env.SRC_URL_ROOT }}/${file}"
-          tar xvf "${file}"
-          rm -rf "${file}"
-
       - name: Check if upstream version is newer
         run: |
           sudo apt-get update
