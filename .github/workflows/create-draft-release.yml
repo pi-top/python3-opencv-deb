@@ -59,13 +59,13 @@ jobs:
           echo "VERSION=$(dpkg-parsechangelog -Sversion)" >> $GITHUB_ENV
 
       - name: Download Debian binary artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
             name: "${{ env.GITHUB_REPOSITORY_NAME }}-#${{ env.GITHUB_SHA_SHORT }}-deb"
             path: "./deb/"
 
       - name: Download Debian source artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
             name: "${{ env.GITHUB_REPOSITORY_NAME }}-#${{ env.GITHUB_SHA_SHORT }}-deb-src"
             path: "./deb-src/"
